@@ -1,26 +1,45 @@
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
 public class Main {
     private static int[] nums = new int[]{0, 0, 100};
     private static int target = 100;
 
     public static void main(String[] args) {
         Main main = new Main();
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+
         System.out.println(Arrays.toString(main.twoSum(nums, target)));
-        System.out.println(main.containsDuplicate(nums));
     }
 
     public int[] twoSum(int[] nums, int target) {
-        for (int i = 0; i < nums.length - 1; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] == target) {
-                    return new int[]{i, j};
-                }
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (((HashMap<?, ?>) map).containsKey(complement)) {
+                return new int[]{map.get(complement), i};
             }
+            map.put(nums[i], i);
         }
-        return null;
+
+        throw new IllegalArgumentException("No two sum solution");
     }
+
+//        System.out.println(Arrays.toString(main.twoSum(nums, target)));
+//        System.out.println(main.containsDuplicate(nums));
+//    }
+//
+//    public int[] twoSum(int[] nums, int target) {
+//        for (int i = 0; i < nums.length - 1; i++) {
+//            for (int j = i + 1; j < nums.length; j++) {
+//                if (nums[i] + nums[j] == target) {
+//                    return new int[]{i, j};
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> set = new HashSet<>();
